@@ -1,5 +1,13 @@
+@import './Vars.scss';
+@import './Media.scss';
+
+
 body {
     margin: 0;
-    background-color: blue;
-    color: rgb(182, 161, 77);
+    font-family: $theme-font;
+    background: $main-color;
+}
+  
+* {
+    box-sizing: border-box;
 }
