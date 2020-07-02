@@ -7,7 +7,11 @@ body {
     font-family: $theme-font;
     background: $main-color;
 }
-  
-* {
-    box-sizing: border-box;
+
+::placeholder {
+    color: white;
 }
+  
+// * {
+//     box-sizing: border-box;
+// }
