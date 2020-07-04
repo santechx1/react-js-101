@@ -20,7 +20,7 @@
     justify-content: space-around;
     min-height: 700px;
     padding: 60px 68px 40px;
-    width: 300px;
+    // width: 300px;
 }
   
 .login__container--form {
@@ -90,10 +90,6 @@
     outline: none;
     padding: 0px 20px;
 }
-  
-// ::placeholder {
-//     color: white;
-// }
   
 .login__button {
     background-color: rgba(255, 255, 255, 0.3);
