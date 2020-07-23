@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
@@ -8,54 +9,43 @@ import CarouselItem from '../components/CarouselItem';
 import '../assets/styles/App.scss';
 
 const Home = ({ myList, trends, originals }) => {
-    return (
-        <>
-            <Header />
-            <Search />
-            {
-                myList.length > 0 &&
-                <Categories title="My List">
-                    <Carousel>
-                        {
-                            myList.map(item =>
-                                <CarouselItem
-                                    key={item.id}
-                                    {...item}
-                                    isList
-                                />
-                            )
-                        }
-                    </Carousel>
-                </Categories>
-            }
-            <Categories title="Trends">
-                <Carousel>
-                    {
-                        trends.map(item =>
-                            <CarouselItem key={item.id} {...item} />
-                        )
-                    }
-                </Carousel>
-            </Categories>
-            <Categories title="Platzi Video Originals">
-                <Carousel>
-                    {
-                        originals.map(item =>
-                            <CarouselItem key={item.id} {...item} />
-                        )
-                    }
-                </Carousel>
-            </Categories>
-        </>
-    );
-}
+  return (
+    <>
+      <Header />
+      <Search />
+      {myList.length > 0 && (
+        <Categories title='My List'>
+          <Carousel>
+            {myList.map((item) => (
+              <CarouselItem key={item.id} {...item} isList />
+            ))}
+          </Carousel>
+        </Categories>
+      )}
+      <Categories title='Trends'>
+        <Carousel>
+          {trends.map((item) => (
+            <CarouselItem key={item.id} {...item} />
+          ))}
+        </Carousel>
+      </Categories>
+      <Categories title='Video Originals'>
+        <Carousel>
+          {originals.map((item) => (
+            <CarouselItem key={item.id} {...item} />
+          ))}
+        </Carousel>
+      </Categories>
+    </>
+  );
+};
 
-const mapStateToProps = state => {
-    return {
-        myList: state.myList,
-        trends: state.trends,
-        originals: state.originals,
-    };
+const mapStateToProps = (state) => {
+  return {
+    myList: state.myList,
+    trends: state.trends,
+    originals: state.originals,
+  };
 };
 
 export default connect(mapStateToProps, null)(Home);
