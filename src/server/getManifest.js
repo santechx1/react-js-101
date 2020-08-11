@@ -5,6 +5,10 @@ const getManifest = () => {
     return JSON.parse(fs.readFileSync(`${__dirname}/public/manifest.json`));
   } catch (error) {
     console.log(error);
+    return {
+      'main.css': '/assets/app.css',
+      'main.js': '/assets/app.js',
+    };
   }
 };
 

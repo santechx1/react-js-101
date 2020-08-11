@@ -13,6 +13,7 @@ const preloadedState = window.__PRELOADED_STATE__;
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer, preloadedState, composeEnhancers(applyMiddleware(thunk)));
 
+// const renderMethod = module.hot ? ReactDOM.render : ReactDOM.hydrate;
 delete window.__PRELOADED_STATE__;
 
 ReactDOM.hydrate(

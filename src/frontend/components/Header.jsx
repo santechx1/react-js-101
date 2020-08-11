@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import gravatar from '../utils/gravatar';
@@ -65,6 +66,13 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   logoutRequest,
+};
+
+Header.propTypes = {
+  user: PropTypes.object,
+  isLogin: PropTypes.bool,
+  isRegister: PropTypes.bool,
+  logoutRequest: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

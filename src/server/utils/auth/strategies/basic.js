@@ -1,4 +1,4 @@
-import { use } from 'passport';
+import passport from 'passport';
 import { BasicStrategy } from 'passport-http';
 import { unauthorized } from '@hapi/boom';
 import axios from 'axios';
@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 const { API_URL, API_KEY_TOKEN } = process.env;
-use(
+passport.use(
   new BasicStrategy(async (email, password, cb) => {
     try {
       const { data, status } = await axios({
@@ -25,7 +25,7 @@ use(
       }
       return cb(null, data);
     } catch (error) {
-      cb(error);
+      return cb(error);
     }
   }),
 );

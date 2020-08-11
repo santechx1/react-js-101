@@ -6,23 +6,23 @@ import Player from '../containers/Player';
 
 const routes = [
   {
-    exact: true,
     path: '/',
+    exact: true,
     component: Home,
   },
   {
-    exact: true,
     path: '/login',
+    exact: true,
     component: Login,
   },
   {
-    exact: true,
     path: '/register',
+    exact: true,
     component: Register,
   },
   {
-    exact: true,
     path: '/player/:id',
+    exact: true,
     component: Player,
   },
   {
