@@ -15,7 +15,6 @@ import passport from 'passport';
 import axios from 'axios';
 import serverRoutes from '../frontend/routes/serverRoutes';
 import reducer from '../frontend/reducers';
-import initialState from '../frontend/initialState';
 import getManifest from './getManifest';
 
 dotenv.config();
@@ -79,14 +78,48 @@ const setResponse = (html, preloadedState, manifest) => {
   `;
 };
 
-const renderApp = (req, res) => {
+const renderApp = async (req, res) => {
+  let initialState;
+  const { email, name, id, token } = req.cookies;
+  try {
+    const { data, status } = await axios({
+      url: `${API_URL}/api/movies`,
+      headers: { Authorization: `Bearer ${token}` },
+      method: 'get',
+    });
+    if (!data || status !== 200) {
+      initialState = {
+        user: {},
+        myList: [],
+        trends: [],
+        originals: [],
+      };
+    }
+    initialState = {
+      user: {
+        email, name, id,
+      },
+      myList: [],
+      trends: data.data.filter((movie) => movie.contentRating === 'PG' && movie._id),
+      originals: data.data.filter((movie) => movie.contentRating === 'G' && movie._id),
+    };
+  } catch (error) {
+    console.log(error);
+    initialState = {
+      user: {},
+      myList: [],
+      trends: [],
+      originals: [],
+    };
+  }
   console.log(req.method, req.path, req.headers['user-agent']);
   const store = createStore(reducer, initialState);
   const preloadedState = store.getState();
+  const isLogged = (initialState.user.id);
   const html = renderToString(
     <Provider store={store}>
       <StaticRouter location={req.url} context={{}}>
-        {renderRoutes(serverRoutes)}
+        {renderRoutes(serverRoutes(isLogged))}
       </StaticRouter>
     </Provider>,
   );

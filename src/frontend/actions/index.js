@@ -69,4 +69,17 @@ export const loginUser = ({ email, password }, redirectUrl) => {
   };
 };
 
+export const registerUserMovie = ({ userId, movieId }) => {
+  return (dispatch) => {
+    axios({
+      url: '/user-movies',
+      method: 'post',
+      data: {
+        userId, movieId,
+      },
+    })
+      .then(({ data }) => dispatch(setFavorite(data)))
+      .catch((error) => dispatch(setError(error)));
+  };
+};
 export { setFavorite as default };
